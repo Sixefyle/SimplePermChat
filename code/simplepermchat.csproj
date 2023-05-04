@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<AssemblyName>simplepermchat</AssemblyName>
+		<PackageId>simplepermchat</PackageId>
+		<LangVersion>11</LangVersion>
+		<NoWarn>1701;1702;1591;</NoWarn>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<DefineConstants>SANDBOX;ADDON;DEBUG</DefineConstants>
+		<AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Update="**\*.scss" DependentUpon="%(Filename).cs" />
+		<None Update="**\*.css" DependentUpon="%(Filename).cs" />
+		<None Update="**\*.sass" DependentUpon="%(Filename).cs" />
+		<None Update="**\*.html" DependentUpon="%(Filename).cs" />
+		<None Update="**\*.htm" DependentUpon="%(Filename).cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AdditionalFiles Include="**/*.razor" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Sandbox.Internal.GlobalGameNamespace" Static="true" />
+	</ItemGroup>
+
+  <PropertyGroup>
+	<OutputPath>C:\SteamSSD\steamapps\common\sbox/.vs/output/</OutputPath>
+	<DocumentationFile>C:\SteamSSD\steamapps\common\sbox/.vs/output/simplepermchat.xml</DocumentationFile>
+	<RootNamespace>Sandbox</RootNamespace>
+	<Nullable>disable</Nullable>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<Analyzer Include="C:\SteamSSD\steamapps\common\sbox\bin\managed\Sandbox.Generator.dll"/>
+		<Reference Include="C:\SteamSSD\steamapps\common\sbox\bin\managed/Sandbox.System.dll" />
+		<Reference Include="C:\SteamSSD\steamapps\common\sbox\bin\managed/Sandbox.Engine.dll" />
+		<Reference Include="C:\SteamSSD\steamapps\common\sbox\bin\managed/Sandbox.Game.dll" />
+		<Reference Include="C:\SteamSSD\steamapps\common\sbox\bin\managed/Sandbox.Event.dll" />
+		<Reference Include="C:\SteamSSD\steamapps\common\sbox\bin\managed/Sandbox.Bind.dll" />
+		<Reference Include="C:\SteamSSD\steamapps\common\sbox\bin\managed/Sandbox.Reflection.dll" />
+	</ItemGroup>
+
+  <ItemGroup>
+		<ProjectReference Include="C:\SteamSSD\steamapps\common\sbox\addons\base\code\Base Library.csproj" />
+
+  </ItemGroup>
+
+</Project>

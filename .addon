@@ -1,9 +1,9 @@
 {
-  "Title": "SimpleChat",
+  "Title": "SimplePermChat",
   "Type": "addon",
   "Org": "gst",
-  "Ident": "simplechat",
-  "Tags": null,
+  "Ident": "simplepermchat",
+  "Tags": "permission chat simple spc pc addon",
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
@@ -19,8 +19,9 @@
     "PhysicsMaxs": "1,1,1",
     "RenderMins": "-1,-1,-1",
     "RenderMaxs": "-1,-1,-1",
-    "Summary": "",
+    "Summary": "Simple addon that manage a chat with chat command and permission system",
     "Description": "",
-    "Public": false
+    "Public": true,
+    "ReplaceTags": "permission chat simple spc pc addon"
   }
 }

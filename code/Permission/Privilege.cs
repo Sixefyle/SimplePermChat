@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static SimpleChat.Permission.Privilege;
+using static SimplePermChat.Permission.Privilege;
 
-namespace SimpleChat.Permission
+namespace SimplePermChat.Permission
 {
 	public class Privilege
 	{
@@ -25,8 +25,10 @@ namespace SimpleChat.Permission
 			public DateTime LastSeenDate { get; set; }
 			public Role Role { get; set; }
 			public DateTime RoleEndTime { get; set; }
+			public DateTime BanEndTime { get; set; }
 		}
 
+		//Maybe use SetValue() from client
 		public static Dictionary<IClient, PlayerData> ClientsData = new();
 
 		public static PlayerData GetPlayerData(IClient client)
@@ -45,23 +47,32 @@ namespace SimpleChat.Permission
 			SavePlayerData(client);
 		}
 
-		public static void InitPlayerData(IClient client) 
+		public static void SetPlayerRole(IClient client, Role role, int days)
+		{
+			ClientsData[client].RoleEndTime = DateTime.Now.AddDays(days);
+			SetPlayerRole(client, role);
+		}
+
+		public static PlayerData InitPlayerData(IClient client) 
 		{
 			if (FileSystem.Data.FileExists($"{client.SteamId}.json"))
 			{
 				LoadPlayerData(client);
+				ClientsData[client].LastSeenDate = DateTime.Now;
+				ClientsData[client].LastSeenName = client.Name;
 			}
 			else
 			{
 				PlayerData playerData = new PlayerData();
 				playerData.Steamid = client.SteamId;
 				playerData.LastSeenName = client.Name;
-				playerData.Role = Role.Admin;
+				playerData.Role = Role.Player;
 				playerData.LastSeenDate = DateTime.Now;
 
 				ClientsData[client] = playerData;
-				SavePlayerData(client);
 			}
+			SavePlayerData(client);
+			return ClientsData[client];
 		}
 
 		public static void LoadPlayerData(IClient client)
@@ -80,7 +91,21 @@ namespace SimpleChat.Permission
 		[GameEvent.Server.ClientJoined]
 		public static void OnClientJoin(ClientJoinedEvent e)
 		{
-			InitPlayerData(e.Client);
+			var client = e.Client;
+			var playerData = InitPlayerData(client);
+			var now = DateTime.Now;
+
+			if(playerData.BanEndTime > now)
+			{
+				client.Kick();
+			}
+
+			if(playerData.RoleEndTime > DateTime.MinValue && playerData.RoleEndTime < now)
+			{
+				playerData.Role = Role.Player;
+				playerData.RoleEndTime = DateTime.MinValue;
+				SavePlayerData(client);
+			}
 		}
 
 		[GameEvent.Server.ClientDisconnect]

@@ -1,13 +1,13 @@
 ﻿using Sandbox;
-using SimpleChat.Command;
+using SimplePermChat.Command;
 using System.Linq;
 
-namespace SimpleChat
+namespace SimplePermChat
 {
 	public partial class Chat
 	{
 		[ConCmd.Client("chat_add", CanBeCalledFromServer = true)]
-		public static void AddChatEntry(string name, string message, string playerId = "0", bool isInfo = false)
+		public static void SendMessage(string name, string message, string playerId = "0", bool isInfo = false)
 		{
 			Current?.AddEntry(name, message, long.Parse(playerId), isInfo);
 
@@ -19,9 +19,9 @@ namespace SimpleChat
 		}
 
 		[ClientRpc]
-		public static void AddChatEntry(string name, string message, long playerId = 0, bool isInfo = false)
+		public static void SendMessage(string name, string message, long playerId = 0, bool isInfo = false)
 		{
-			AddChatEntry(name, message, playerId.ToString(), isInfo);
+			SendMessage(name, message, playerId.ToString(), isInfo);
 		}
 
 		[ConCmd.Server("say")]
@@ -39,7 +39,7 @@ namespace SimpleChat
 			} 
 			else
 			{
-				AddChatEntry(To.Everyone, ConsoleSystem.Caller.Name, message, ConsoleSystem.Caller.SteamId, true);
+				SendMessage(To.Everyone, ConsoleSystem.Caller.Name, message, ConsoleSystem.Caller.SteamId, true);
 			}
 			Log.Info($"{ConsoleSystem.Caller}: {message}");
 
@@ -53,7 +53,7 @@ namespace SimpleChat
 
 			if (!ChatCommandManager.ExecuteCommand(sender, command, args))
 			{
-				Chat.AddChatEntry(To.Single(sender), "Command Error", "Command not found!", 0, false);
+				Chat.SendMessage(To.Single(sender), "Command Error", "Command not found!", 0, false);
 			}
 		}
 	}

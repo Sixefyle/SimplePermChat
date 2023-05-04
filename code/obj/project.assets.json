@@ -33,9 +33,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\users\\sixef\\onedrive\\documents\\s&box projects\\simplechat\\code\\simplechat.csproj",
-      "projectName": "simplechat",
-      "projectPath": "c:\\users\\sixef\\onedrive\\documents\\s&box projects\\simplechat\\code\\simplechat.csproj",
+      "projectUniqueName": "c:\\users\\sixef\\onedrive\\documents\\s&box projects\\simplechat\\code\\simplepermchat.csproj",
+      "projectName": "simplepermchat",
+      "projectPath": "c:\\users\\sixef\\onedrive\\documents\\s&box projects\\simplechat\\code\\simplepermchat.csproj",
       "packagesPath": "C:\\Users\\sixef\\.nuget\\packages\\",
       "outputPath": "c:\\users\\sixef\\onedrive\\documents\\s&box projects\\simplechat\\code\\obj\\",
       "projectStyle": "PackageReference",

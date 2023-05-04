@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Sandbox;
 using Sandbox.UI;
 
-namespace SimpleChat.UI
+namespace SimplePermChat.UI
 {
 	public class ChatHud : HudEntity<RootPanel>
 	{

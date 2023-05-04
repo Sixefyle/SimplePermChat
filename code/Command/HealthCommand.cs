@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Sandbox;
-using SimpleChat.Permission;
-using SimpleChat.Utils;
+using SimplePermChat.Command.Interface;
+using SimplePermChat.Permission;
+using SimplePermChat.Utils;
 
-namespace SimpleChat.Command
+namespace SimplePermChat.Command
 {
-	internal class HealthCommand : IChatCommand
+    internal class HealthCommand : IChatCommand
 	{
 		public Privilege.Role RequiredRole => Privilege.Role.Moderator;
 
@@ -27,7 +28,15 @@ namespace SimpleChat.Command
 				}
 			}
 		}
+		public string Helper()
+		{
+			StringBuilder sb = new StringBuilder();
 
+			sb.Append("Change the target Health (reset on death)");
+			sb.AppendLine();
+			sb.Append("Exemple usage: /hp set Sixefyle 200");
 
+			return sb.ToString();
+		}
 	}
 }

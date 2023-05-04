@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Sandbox;
 
-namespace SimpleChat.Utils
+namespace SimplePermChat.Utils
 {
 	public class Util
 	{

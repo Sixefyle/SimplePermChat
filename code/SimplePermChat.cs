@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Sandbox;
-using SimpleChat.Command;
-using SimpleChat.UI;
+using SimplePermChat.Command;
+using SimplePermChat.UI;
 
-namespace SimpleChat
+namespace SimplePermChat
 {
-	public partial class SimpleChat
+	public partial class SimplePermChat
 	{
 		public static ChatHud ChatHud { get; protected set; }
 
@@ -26,8 +26,10 @@ namespace SimpleChat
 		public static void RegisterCommands()
 		{
 			ChatCommandManager.RegisterCommand("help", new HelpCommand());
-			ChatCommandManager.RegisterCommand("health", new HealthCommand());
+			ChatCommandManager.RegisterCommand("hp", new HealthCommand());
 			ChatCommandManager.RegisterCommand("kick", new KickCommand());
+			ChatCommandManager.RegisterCommand("role", new RoleCommand());
+			ChatCommandManager.RegisterCommand("ban", new BanCommand());
 		}
 
 		public static void CreateChatHud()
